@@ -4,6 +4,7 @@
   "description": "My 3 attempt",
   "main": "app.js",
   "scripts": {
+    "start":"node app.js",
     "server": "nodemon run app.js"
   },
   "author": "Abdrashitov Michail <abdraloguzov@mail.ru>",
