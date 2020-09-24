@@ -4,7 +4,7 @@
   "description": "My 3 attempt",
   "main": "app.js",
   "scripts": {
-    "start":"node app.js",
+    "start":"npm config set unsafe-perm true; npm cache clean --force; npm install; node app.js",
     "server": "nodemon run app.js"
   },
   "author": "Abdrashitov Michail <abdraloguzov@mail.ru>",
