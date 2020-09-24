@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
+    crossorigin="anonymous">
+    <title>Гостевая</title>
+    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link href="https://unpkg.com/tabulator-tables@4.8.1/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.1/dist/js/tabulator.min.js"></script>
+</head>
+<body>
+    <form class="m-3">
+        <h1>Загрузить лог</h1>
+        <input type="file" id="file" onchange="showFile(this)">
+    </form>
+    <div class="table-controls mt-2 ml-3 invisible" style="font-size: 14px;" id="div-table-control">
+        <span>
+          <label>Поле: </label>
+          <select id="filter-field">
+            <option value="Timestamp">Timestamp</option>
+            <option value="Message Type">Message Type</option>
+            <option value="Source of messager">Source of message</option>
+            <option value="Message">Message</option>
+          </select>
+        </span>
+    
+        <span>
+          <label>Операция: </label>
+          <select id="filter-type">
+            <option value="keywords">Поиск</option>
+            <option value="=">=</option>
+            <option value="<">&lt;</option>
+            <option value="<=">&lt;=</option>
+            <option value=">">&gt;</option>
+            <option value=">=">&gt;=</option>
+            <option value="!=">!=</option>
+            <option value="like">like</option>
+            
+          </select>
+        </span>
+    
+        <span><label>Значение: </label> <input id="filter-value" type="text" placeholder="value to filter"></span>
+    
+        <button id="filter-clear">Убрать фильтр</button>
+        <button id="delete-form" onclick="deleteSelectedRows()">Удалить строки</button>
+        <button id="save-form" onclick="saveTable()">Загрузить таблицу</button>
+      </div>
+    <div id="example-table" style="font-size: 12px;"></div>
+    <script src="./js/log-logic.js"></script>
+</body>
+</html>

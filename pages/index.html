@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbcdRaS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <form class="form-signin" name="auth">
+        <h1 class="h3 b3">Авторизуйтесь</h1>
+        <div class="form-group">
+          <label for="login">Логин</label>
+          <input type="text" class="form-control" id="login" />
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль</label>
+          <input type="password" class="form-control" id="password">
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="sendForm()" >Войти</button>
+        <button type="button" class="btn btn-link" onclick="location.href='/guest'">Гость</button>
+      </form>
+    <p>
+      <div class="text-center font-weight-light">Это веб-приложение предназначенно для просмотра <a href="/logs">логов</a> 
+      и удаленной работы с ними.
+      <br>Написано Абдрашитовым Михаилом на <a href="https://nodejs.org">NodeJS</a>
+      <br>С использованием фреймворков <a href="https://expressjs.com">Express</a>, 
+      <a href="https://getbootstrap.com">Bootstrap</a>, и JS библиотеки
+      <a href="http://tabulator.info">Tabulator</a>
+      <br>2020
+      </div>
+    </p>
+    <script src="./js/util.js"></script>
+</body>
+</html>
