@@ -2,7 +2,7 @@ const express = require("express")
 const session = require("express-session")
 const Pather= require("./Pather")
 
-const PORT = 80
+const PORT = process.env.PORT || 80
 
 const app = express()
 const pather = new Pather(app)
