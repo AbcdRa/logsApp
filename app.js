@@ -32,23 +32,6 @@ app.use("/guest", require("./js/guest"))
 
 
 
-// app.get("/", (req, res) => {
-//     res.sendFile(path.join(__dirname, "/pages/index.html"))
-
-// })
-
-// app.get("/js/util.js", (req, res) => {
-//     res.sendFile(path.join(__dirname,"/pages/js/util.js"))
-// })
-
-// app.get("/css/styles.css", (req, res) => {
-//     res.sendFile(path.join(__dirname,"/pages/css/styles.css"))
-// })
-
-// app.get("/favicon.ico", (req, res) => {
-//     res.sendFile(path.join(__dirname,"/flavicon.ico"))
-// })
-
 app.listen(PORT,() => {
     console.log(`Server start on port ${PORT}`);
 })

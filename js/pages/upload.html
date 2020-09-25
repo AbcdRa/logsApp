@@ -19,21 +19,26 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/logs">Логи<span class="sr-only"></span></a>
-            </li>
             <li class="nav-item">
-              <a class="nav-link" href="logs/upload">Загрузить</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="logs/guest">Локальный просмотр</a>
-            </li>
+                <a class="nav-link" href="/logs">Логи<span class="sr-only"></span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="logs/upload">Загрузить</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="logs/guest">Локальный просмотр</a>
+              </li>
+
           </ul>
           <form class="form-inline mt-2 mt-md-0">
             <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick='deauth()'>Log Out</button>
           </form>
         </div>
       </nav>
-      <script src="./js/util.js"></script>
+    <form class="m-3">
+        <h1>Загрузить лог</h1>
+        <input type="file" id="file" onchange="showFile(this)">
+    </form>
+    <script src="./js/util.js"></script>
 </body>
 </html>
