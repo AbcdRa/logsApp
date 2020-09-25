@@ -3,8 +3,9 @@ const path = require("path")
 const PATH = [
 {"/pages/index.html":"/"},
 {"/pages/js/util.js":"/js/util.js"},
+{"/pages/js/upload-logic.js":"/js/upload-logic.js"},
 {"/pages/css/styles.css":"/css/styles.css"},
-{"/favicon.ico" : "/favicon.ico"},
+{"../favicon.ico" : "/favicon.ico"},
 {"/pages/js/log-logic.js" : "/js/log-logic.js"},
 {"/pages/log-control.html" : "/log-control"},
 {"/dist/css/bootstrap/tabulator_bootstrap4.min.css":"/dist/css/materialize/tabulator_materialize.min.css"},

@@ -20,7 +20,7 @@ router.get("/upload",(req,res) => {
 
 router.get("/guest",(req,res) => {
     if(req.session.checked) {
-        return res.sendFile(path.join(__dirname, "/pages/upload.html"))
+        return res.sendFile(path.join(__dirname, "/pages/logs-guest.html"))
     }
     //При попытке зайти неавторизованным отправляем на основную страницу авторизации
     res.redirect("/")

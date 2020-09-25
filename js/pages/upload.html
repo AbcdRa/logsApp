@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
     crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css"/>
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-    <title>Логи</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <title>Загрузить логи</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -23,10 +23,10 @@
                 <a class="nav-link" href="/logs">Логи<span class="sr-only"></span></a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="logs/upload">Загрузить</a>
+                <a class="nav-link" href="/logs/upload">Загрузить</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="logs/guest">Локальный просмотр</a>
+                <a class="nav-link" href="/logs/guest">Локальный просмотр</a>
               </li>
 
           </ul>
@@ -39,6 +39,6 @@
         <h1>Загрузить лог</h1>
         <input type="file" id="file" onchange="showFile(this)">
     </form>
-    <script src="./js/util.js"></script>
+    <script src="/js/upload-logic.js"></script>
 </body>
 </html>

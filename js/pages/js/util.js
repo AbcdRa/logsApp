@@ -1,4 +1,4 @@
-function sendForm() {
+function auth() {
     //Инициализируем реквест
     const xhr = new XMLHttpRequest();
     //Инициализируем контейнер для отправляемых полей
@@ -42,3 +42,5 @@ function deauth() {
     }
     xhr.send()
 }
+
+
