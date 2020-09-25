@@ -22,5 +22,4 @@ xhr.send(formData);
 
 
 function renderInfoTable(response) {
-    
 }

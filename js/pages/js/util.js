@@ -1,4 +1,4 @@
-function auth() {
+function authorization() {
     //Инициализируем реквест
     const xhr = new XMLHttpRequest();
     //Инициализируем контейнер для отправляемых полей
@@ -18,11 +18,10 @@ function auth() {
     //так как файл json то берем значения поля message
     xhr.onreadystatechange = function() {
      if (xhr.readyState === 4) {
-        if(xhr.response["message"] === "OK") { 
-            location.href = 'logs';
-        } else {
-        alert(xhr.response["message"])
-        }
+        if(xhr.response["message"] !== "OK") { 
+            alert(xhr.response["message"])
+        } 
+        location.href = 'logs';
      }
     }
     //Отправляем response
@@ -42,5 +41,6 @@ function deauth() {
     }
     xhr.send()
 }
+
 
 

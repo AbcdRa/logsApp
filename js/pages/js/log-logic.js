@@ -1,21 +1,12 @@
-
 const reader = new FileReader()
-const separators = [", ",  "     ", "  "]
-const columns = [ 
-    {title:"Timestamp", field:"Timestamp", editor:"input"},
-    {title:"Message Type", field:"Message Type", editor:"input"},
-    {title:"Source of message", field:"Source of message", editor:"input"},
-    {title:"Message", field:"Message", editor:"input", minWidth:1400},
-]
 const magicNumber = 6.0344827586206895
 const logTable = []
 const clientHeight = window.innerHeight - 60
 let table
-let deleteMode = false
 let nameUploadedFile
 
 
-function getMaxLengthMessage() {
+function getMaxLengthMessage(logTable) {
     let maxLength = 0
     for(const row of logTable) {
         if(row["Message"] && row["Message"].length > maxLength) {
@@ -33,26 +24,11 @@ Tabulator.prototype.extendModule("filter", "filters", {
 });
 
 
-function separate(str, template) {
-    const row = {}
-    template.forEach((element, i) => {
-        j = str.indexOf(element)
-        row[columns[i].title] = str.substring(0, j).trim()
-        str = str.substring(j+element.length).trim()
-        if(i===(template.length-1)) {
-            row[columns[i+1].title] = str
-        }
-    });
-    return row
-}
-
-
 function renderTable(log) {
-    const rows = log.split('\n')
+
     document.forms[0].outerHTML = ""
-    
-    rows.forEach(row => {logTable.push(separate(row, separators) )})
-    columns[3].minWidth = magicNumber*getMaxLengthMessage()
+    const logTable = txt2log(log)
+    columns[3].minWidth = magicNumber*getMaxLengthMessage(logTable)
     table = new Tabulator("#example-table", {
         resizableColumns: true,
         autoResize:false,

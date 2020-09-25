@@ -3,6 +3,7 @@ const path = require("path")
 const PATH = [
 {"/pages/index.html":"/"},
 {"/pages/js/util.js":"/js/util.js"},
+{"txt2log.js":"/js/txt2log.js"},
 {"/pages/js/upload-logic.js":"/js/upload-logic.js"},
 {"/pages/css/styles.css":"/css/styles.css"},
 {"../favicon.ico" : "/favicon.ico"},
