@@ -16,9 +16,9 @@ app.use(session({
     saveUninitialized: true
 }))
 
-app.use("/auth", require("./auth"))
-app.use("/logs", require("./logs"))
-app.use("/guest", require("./guest"))
+app.use("/auth", require("./js/auth"))
+app.use("/logs", require("./js/logs"))
+app.use("/guest", require("./js/guest"))
 
 
 
