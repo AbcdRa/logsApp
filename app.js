@@ -1,6 +1,6 @@
 const express = require("express")
 const session = require("express-session")
-const Pather= require("./Pather")
+const Pather= require("./js/Pather")
 
 const PORT = process.env.PORT || 80
 
