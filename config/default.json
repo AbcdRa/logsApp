@@ -1,0 +1,3 @@
+{
+    "mongoURL" : "mongodb+srv://AbcdRaS:pass@cluster0.sfdip.mongodb.net/logDB?retryWrites=true&w=majority"
+}

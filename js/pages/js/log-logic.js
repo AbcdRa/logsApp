@@ -16,7 +16,13 @@ let nameUploadedFile
 
 
 function getMaxLengthMessage() {
-    return logTable.sort((r1, r2) => r2["Message"].length - r1["Message"].length)[0].Message.length
+    let maxLength = 0
+    for(const row of logTable) {
+        if(row["Message"] && row["Message"].length > maxLength) {
+            maxLength = row["Message"].length
+        }
+    }
+    return maxLength
 }
 
 
@@ -59,7 +65,6 @@ function renderTable(log) {
         selectableRangeMode:"click",
 
     });
-
     filterEnable(table)
 }
 
