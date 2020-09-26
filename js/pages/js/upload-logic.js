@@ -36,11 +36,11 @@ function sendFileOnServer(file, name) {
     xhr.onreadystatechange = function() {
         const message = xhr.response["message"]
         if (xhr.readyState === 4 && message === "OK") { 
-            alert("Sucess upload:" + name)
+            alert("Лог успешно загружен: " + name)
         } else {
             alert(message)
         }
-        document.getElementById("file").files = undefined
+        document.getElementById("file").value = "" 
         document.getElementById("logName").value = ""
     }
     //Отправляем response

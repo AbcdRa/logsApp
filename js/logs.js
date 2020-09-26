@@ -26,19 +26,24 @@ router.get("/upload", (req,res) => {
 })
 
 
-router.post("/upload", upload.none(), (req, res) => {
+router.post("/upload", upload.none(), async (req, res) => {
     if(req.session.checked) {
         const logTable = txt2log(req.body.logFile)
         const logName = req.body.logName
         const newLog = new Log({table:logTable, name:logName})
-        newLog.save(err => {
-            if(err) {
-                console.log("Невозможно сохранить")
-                console.log(err)
-            }
-            console.log("Hoorey")
-        })
+        const duplicate = await Log.exists({ name: logName });
+        if(duplicate) {
+            return res.json({message:"Имя лога занято"})
+        }
+        const saveLog = await newLog.save()
+        if(saveLog!==newLog) {
+            console.log("Невозможно сохранить")
+            console.log(saveLog)
+            return res.json({message:"Произошла ошибка(на сервере): "+saveLog})
+        }
+        console.log("Лог успешно сохранен: "+logName)
         return res.json({"message":"OK"})
+        
     }
     return res.json({"message":"Not OK"})
 })
@@ -53,7 +58,6 @@ router.get("/guest",(req,res) => {
 
 router.post("/db",(req,res) => {
     if(req.session.checked) {
-        console.log(Log)
         Log.find(function (err, logs) {
             if (err) return console.error(err);
             const logList = []

@@ -12,7 +12,7 @@ const pather = new Pather(app)
 
 const logSchema = new mongoose.Schema({
     table : Array,
-    name  : String,
+    name  : {type: String, required:true}
 })
 
 const Log = mongoose.model("Log", logSchema)
@@ -39,6 +39,7 @@ app.use(session({
 app.use("/auth", require("./js/auth"))
 app.use("/logs", require("./js/logs"))
 app.use("/guest", require("./js/guest"))
+app.use("/delete", require("./js/delete"))
 
 
 
