@@ -1,12 +1,14 @@
 function upload(form) {
     const reader = new FileReader()
     const uploadedFile = form.files[0]
+    let filename = document.getElementById("logName").value
+    if(!filename) filename=uploadedFile.name
     
     reader.readAsText(uploadedFile);
 
     reader.onload = function() {
         const log = reader.result
-        sendFileOnServer(log)
+        sendFileOnServer(log, filename)
     };
   
     reader.onerror = function() {
@@ -16,12 +18,13 @@ function upload(form) {
 }
 
 
-function sendFileOnServer(file) {
+function sendFileOnServer(file, name) {
     //Инициализируем реквест
     const xhr = new XMLHttpRequest();
     //Инициализируем контейнер для отправляемых полей
     const formData = new FormData();
     formData.append("logFile", file);
+    formData.append("logName", name);
     //Делаем пост запрос на страницу /auth
     xhr.open("POST", '/logs/upload');
     //Ожидаем получить респонс в виде файла json
@@ -31,11 +34,14 @@ function sendFileOnServer(file) {
     //находится ли он на последней фазе 4
     //так как файл json то берем значения поля message
     xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.response["message"] === "OK") { 
-            console.log("Sucess")
+        const message = xhr.response["message"]
+        if (xhr.readyState === 4 && message === "OK") { 
+            alert("Sucess upload:" + name)
         } else {
-        alert(xhr.response["message"])
+            alert(message)
         }
+        document.getElementById("file").files = undefined
+        document.getElementById("logName").value = ""
     }
     //Отправляем response
     xhr.send(formData);

@@ -21,7 +21,7 @@ router.post("/", upload.none(),(req, res) => {
     const login = formData['login']
     const password = formData['password']
     //DEBUGMOMENT
-    console.log(`${login} ${password}`)
+    //console.log(`${login} ${password}`)
     const user = loginedUsers.find((user) => {
         return user.login === login
     })

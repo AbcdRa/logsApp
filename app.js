@@ -9,12 +9,22 @@ const PORT = process.env.PORT || 80
 const app = express()
 const pather = new Pather(app)
 
+
+const logSchema = new mongoose.Schema({
+    table : Array,
+    name  : String,
+})
+
+const Log = mongoose.model("Log", logSchema)
+
 mongoose.connect(config.get("mongoURL"), { useNewUrlParser: true, useUnifiedTopology: true  })
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function() {
     console.log("Successfully connect to DB");
 });
+module.exports = Log
+
 
 
 pather.setDefaultAccess()
@@ -35,5 +45,4 @@ app.use("/guest", require("./js/guest"))
 app.listen(PORT,() => {
     console.log(`Server start on port ${PORT}`);
 })
-
 

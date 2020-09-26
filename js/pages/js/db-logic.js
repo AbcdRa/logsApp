@@ -1,7 +1,7 @@
 //Инициализируем реквест
 const xhr = new XMLHttpRequest();
 //Делаем пост запрос на страницу /db
-xhr.open("POST", '/db');
+xhr.open("POST", '/logs/db');
 //Ожидаем получить респонс в виде файла json
 xhr.responseType = 'json';
 
@@ -18,8 +18,14 @@ xhr.onreadystatechange = function() {
     }
 }
 //Отправляем response
-xhr.send(formData);
+xhr.send();
 
 
 function renderInfoTable(response) {
+    const newDiv = document.createElement("div")
+    response.logList.forEach(logName => {
+        newDiv.innerHTML += `${logName}<br>`
+    });
+    document.body.append(newDiv)
+    console.log(response.logList)
 }

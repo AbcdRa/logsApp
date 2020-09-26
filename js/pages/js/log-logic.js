@@ -137,17 +137,3 @@ function download(data, filename, type) {
         }, 0); 
     }
 }
-
-
-// (r1, r2) => {
-//     if(!(r1.getCells().length + r2.getCells().length)) {
-//         return 0
-//     }
-//     if(!r1.getCells().length) {
-//         return -1
-//     }
-//     if(!r2.getCells().length) {
-//         return 1
-//     }
-//     return r1.getCells()[0].getValue().localeCompare(r2.getCells()[0].getValue())
-// }
