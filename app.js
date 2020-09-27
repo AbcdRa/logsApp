@@ -39,7 +39,6 @@ app.use(session({
 app.use("/auth", require("./js/auth"))
 app.use("/logs", require("./js/logs"))
 app.use("/guest", require("./js/guest"))
-app.use("/delete", require("./js/delete"))
 
 
 

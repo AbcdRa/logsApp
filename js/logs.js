@@ -25,6 +25,9 @@ router.get("/upload", (req,res) => {
     res.redirect("/")
 })
 
+router.use("/delete", require("./delete"))
+router.use("/view", require("./view"))
+
 
 router.post("/upload", upload.none(), async (req, res) => {
     if(req.session.checked) {
@@ -48,13 +51,6 @@ router.post("/upload", upload.none(), async (req, res) => {
     return res.json({"message":"Not OK"})
 })
 
-router.get("/guest",(req,res) => {
-    if(req.session.checked) {
-        return res.sendFile(path.join(__dirname, "/pages/logs-guest.html"))
-    }
-    //При попытке зайти неавторизованным отправляем на основную страницу авторизации
-    res.redirect("/")
-})
 
 router.post("/db",(req,res) => {
     if(req.session.checked) {
