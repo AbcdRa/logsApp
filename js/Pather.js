@@ -11,7 +11,8 @@ const PATH = [
 {"/pages/log-control.html" : "/log-control"},
 {"/dist/css/bootstrap/tabulator_bootstrap4.min.css":"/dist/css/materialize/tabulator_materialize.min.css"},
 {"/dist/css/bootstrap/tabulator_bootstrap4.min.css.map":"/dist/css/materialize/tabulator_bootstrap4.min.css.map"},
-{"/pages/js/db-logic.js": "/js/db-logic.js"}
+{"/pages/js/db-logic.js": "/js/db-logic.js"},
+{"/pages/js/view-logic.js": "/js/view-logic.js"},
 ]
 
 class Pather {

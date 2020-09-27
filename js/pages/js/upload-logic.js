@@ -34,14 +34,17 @@ function sendFileOnServer(file, name) {
     //находится ли он на последней фазе 4
     //так как файл json то берем значения поля message
     xhr.onreadystatechange = function() {
-        const message = xhr.response["message"]
-        if (xhr.readyState === 4 && message === "OK") { 
-            alert("Лог успешно загружен: " + name)
-        } else {
-            alert(message)
+        if (xhr.readyState === 4) { 
+            const message = xhr.response.message 
+            if(message === "OK") {
+                alert("Лог успешно загружен: " + name)
+            }
+            else {
+                alert(message)
+            }
+            document.getElementById("file").value = "" 
+            document.getElementById("logName").value = ""
         }
-        document.getElementById("file").value = "" 
-        document.getElementById("logName").value = ""
     }
     //Отправляем response
     xhr.send(formData);

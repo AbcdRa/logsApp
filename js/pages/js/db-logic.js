@@ -1,24 +1,5 @@
-//Инициализируем реквест
-const xhr = new XMLHttpRequest();
-//Делаем пост запрос на страницу /db
-xhr.open("POST", '/logs/db');
-//Ожидаем получить респонс в виде файла json
-xhr.responseType = 'json';
+postRequest("/logs/db",{}, (res) => renderInfoTable(res))
 
-//При каждом изменения статуса получение респонса проверяем
-//находится ли он на последней фазе 4
-//так как файл json то берем значения поля message
-xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4) {
-    if(xhr.response["message"] === "OK") { 
-        renderInfoTable(xhr.response)
-    } else {
-    alert(xhr.response["message"])
-    }
-    }
-}
-//Отправляем response
-xhr.send();
 let id = 0
 
 function getViewButton(logName) {
@@ -26,6 +7,11 @@ function getViewButton(logName) {
     e.className = "btn btn-outline-primary ml-2"
     e.innerText="Просмотр"
     e.id = "view-"+id
+    e.addEventListener("click", ()=>{
+        postRequest("/logs/view", {logName:logName}, res=> {
+            if(res.message==="OK") window.location.href = "/logs/view"
+        })
+    })
     return e
 }
 
@@ -34,29 +20,8 @@ function getDeleteButton(logName) {
     e.className = "btn btn-outline-danger ml-2"
     e.innerText="Удалить"
     e.id = "delete-"+id++
-    e.addEventListener("click", () => {
-        const xhr = new XMLHttpRequest();
-        //Делаем пост запрос на страницу /logs/delete
-        xhr.open("POST", '/logs/delete');
-        //Ожидаем получить респонс в виде файла json
-        xhr.responseType = 'json';
-
-        //При каждом изменения статуса получение респонса проверяем
-        //находится ли он на последней фазе 4
-        //так как файл json то берем значения поля message
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-            if(xhr.response["message"] === "OK") { 
-                window.location.href="\logs"
-            } else {
-            alert(xhr.response["message"])
-            }
-            }
-        }
-        //Отправляем response
-        const formData = new FormData()
-        formData.append("logName", logName)
-        xhr.send(formData);
+    e.addEventListener("click", () => { 
+        postRequest("/logs/delete", {logName:logName}, ()=>window.location.href="\logs")
     })
     return e
 }
@@ -76,3 +41,27 @@ function renderInfoTable(response) {
     document.body.append(newDiv)
     console.log(response.logList)
 }
+
+
+function postRequest(ref, json, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", ref);
+    //Ожидаем получить респонс в виде файла json
+    xhr.responseType = 'json';
+    //При каждом изменения статуса получение респонса проверяем
+    //находится ли он на последней фазе 4
+    //так как файл json то берем значения поля message
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if(xhr.response["message"] === "OK") { 
+                callback(xhr.response)
+            } else {
+                alert(xhr.response["message"])
+            }
+        }
+    }
+    //Отправляем response
+    const formData = new FormData()
+    Object.keys(json).forEach(key => formData.append(key, json[key]))
+    xhr.send(formData);
+} 

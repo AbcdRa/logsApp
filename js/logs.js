@@ -45,7 +45,7 @@ router.post("/upload", upload.none(), async (req, res) => {
             return res.json({message:"Произошла ошибка(на сервере): "+saveLog})
         }
         console.log("Лог успешно сохранен: "+logName)
-        return res.json({"message":"OK"})
+        return res.json({message:"OK"})
         
     }
     return res.json({"message":"Not OK"})
