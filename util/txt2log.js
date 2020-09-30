@@ -6,6 +6,7 @@ const columns = [
 ]
 const separators = [", ",  "     ", "  "]
 
+
 function txt2log(txt) {
     const logTable = []
     const rows = txt.split("\n")
@@ -27,8 +28,9 @@ function separate(str, template) {
     return row
 }
 
+
 try {
-module.exports = txt2log
+    module.exports = txt2log
 } catch(e) {
     console.log("It's web")
 }

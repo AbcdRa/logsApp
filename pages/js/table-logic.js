@@ -1,15 +1,15 @@
+const reader = new FileReader()
 const magicNumber = 6.0344827586206895
 const clientHeight = window.innerHeight - 60
-let updatedRows = []
-let deletedRows = []
-
+let table
 
 
 function getMaxLengthMessage(logTable) {
     let maxLength = 0
+    let nameLastCol = columns[columns.length-1].title
     for(const row of logTable) {
-        if(row["Message"] && row["Message"].length > maxLength) {
-            maxLength = row["Message"].length
+        if(row[nameLastCol] && row[nameLastCol].length > maxLength) {
+            maxLength = row[nameLastCol].length
         }
     }
     return maxLength
@@ -47,6 +47,7 @@ function postRequest(ref, json, callback) {
     console.log("json : ", json)
     xhr.send(formData);
 } 
+
 
 function renderTable(logTable) {
     columns[3].minWidth = magicNumber*getMaxLengthMessage(logTable)
@@ -102,7 +103,7 @@ function filterEnable(table)  {
 
 
 
-function saveTable() {
+function saveAsTxt(tableName) {
     let tableText = ""
     table.getData().sort( (r1, r2) => r2[columns[0].title].localeCompare(r1[columns[0].title]))
     .forEach(
@@ -111,7 +112,7 @@ function saveTable() {
             console.log(i)
         }
     )
-    download(tableText.substring(0,tableText.length-1), nameUploadedFile, ".txt")
+    download(tableText.substring(0,tableText.length-1), tableName, ".txt")
 }
 
 
@@ -141,20 +142,3 @@ function download(data, filename, type) {
         }, 0); 
     }
 }
-
-
-let logName = ""
-
-
-function updateTable() {
-    postRequest("/logs/view/update",{logTable:JSON.stringify(logTable), logName:logName}, res => alert(res))
-}
-
-
-let logTable
-postRequest("/logs/view/table",{},(res)=>{
-    logTable= res.logTable
-    logName=res.logName
-    renderTable(logTable)
-    document.getElementById("div-table-control").className = "table-controls mt-2 ml-3"
-})

@@ -1,7 +1,7 @@
 const express = require("express")
 const multer = require("multer")
 const router = express.Router()
-const Log = require("../app")
+const Log = require("../util/logSchema").getLogModel()
 const path = require("path")
 const upload = multer({
     dest: "./files",
@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
         }
         const logName = req.session.logName
         logTable = await Log.find({name:logName}).exec()
-        return res.sendFile(path.join(__dirname, "/pages/view.html"))
+        return res.sendFile(path.join(__dirname, "../pages/view.html"))
     }
     return res.redirect("/")
 })

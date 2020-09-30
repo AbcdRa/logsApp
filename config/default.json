@@ -1,3 +1,5 @@
 {
-    "mongoURL" : "mongodb+srv://AbcdRaS:pass@cluster0.sfdip.mongodb.net/logDB?retryWrites=true&w=majority"
+    "mongoURL" : "mongodb+srv://AbcdRaS:pass@cluster0.sfdip.mongodb.net/logDB?retryWrites=true&w=majority",
+    "secretExpressSession" : "hedgehog",
+    "sessionTime" : 20
 }

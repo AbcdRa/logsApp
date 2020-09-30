@@ -1,7 +1,8 @@
 const express = require("express")
 const multer = require("multer")
+const Log = require("../util/logSchema").getLogModel()
+
 const router = express.Router()
-const Log = require("../app")
 const upload = multer({
     dest: "./files"
 })
@@ -16,7 +17,6 @@ router.post("/",upload.none(),async (req, res) => {
         ).catch(
             (err,b,c) =>  json.message = err + " " +b + " " +c
         )
-        console.log(json)
         return res.json(json)
     }
     //При попытке зайти неавторизованным отправляем на основную страницу авторизации
