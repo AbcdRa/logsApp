@@ -1,6 +1,6 @@
 const path = require("path")
 
-const PATH = [
+const DEFAULT_PATH = [
 {"../pages/index.html":"/"},
 {"../pages/js/auth-logic.js":"/js/auth-logic.js"},
 {"txt2log.js":"/js/txt2log.js"},
@@ -29,7 +29,7 @@ class Pather {
     }
     setDefaultAccess() {
         //Получаем первый ключ объекта массива и от этого ключа получаем значение
-        PATH.forEach((obj) => this.openAccess(Object.keys(obj)[0], obj[Object.keys(obj)[0]]))
+        DEFAULT_PATH.forEach((obj) => this.openAccess(Object.keys(obj)[0], obj[Object.keys(obj)[0]]))
     }
 }
 

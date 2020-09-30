@@ -7,17 +7,8 @@ const upload = multer({
     dest: "./files",
     limits: { fieldSize: 100 * 1024 * 1024 }
 })
-const multerConf = {
-    storage: multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, "../files")
-        },
-        filename: function (req, file, cb) {
-            cb(null, file.fieldname + '-' + Date.now())
-        }
-    })
-}
 let logTable 
+
 
 router.get("/", async (req, res) => {
     if (req.session.checked) {
@@ -46,6 +37,7 @@ router.post("/", upload.none(), (req, res) => {
         return res.json({message:"OK"})
     }
 })
+
 
 router.post("/update", upload.none(), async(req, res) => {
     if(req.session.checked) {
