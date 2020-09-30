@@ -4,7 +4,7 @@ const Log = require("../util/logSchema").getLogModel()
 
 const router = express.Router()
 const upload = multer({
-    dest: "./files"
+    dest: "../files"
 })
 
 

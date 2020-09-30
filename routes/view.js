@@ -43,7 +43,6 @@ router.post("/table", upload.none(), (req, res) => {
 router.post("/", upload.none(), (req, res) => {
     if(req.session.checked) {
         req.session.logName = req.body.logName
-        console.log(req.session.logName)
         return res.json({message:"OK"})
     }
 })
