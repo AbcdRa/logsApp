@@ -50,7 +50,7 @@ function postRequest(ref, json, callback) {
 
 
 function renderTable(logTable) {
-    columns[3].minWidth = magicNumber*getMaxLengthMessage(logTable)
+    columns[columns.length-1].minWidth = magicNumber*getMaxLengthMessage(logTable)
     table = new Tabulator("#example-table", {
         resizableColumns: true,
         autoResize:false,
@@ -105,11 +105,10 @@ function filterEnable(table)  {
 
 function saveAsTxt(tableName) {
     let tableText = ""
-    table.getData().sort( (r1, r2) => r2[columns[0].title].localeCompare(r1[columns[0].title]))
+    table.getData().sort( (r1, r2) => r2[columns[0].title] - (r1[columns[0].title]))
     .forEach(
         (row, i) => {
             tableText += row2str(row) + '\n'
-            console.log(i)
         }
     )
     download(tableText.substring(0,tableText.length-1), tableName, ".txt")
@@ -118,9 +117,12 @@ function saveAsTxt(tableName) {
 
 function row2str(row) {
     let result = ""
-    Object.values(row).forEach((cell, i) => {
-        result += cell; 
-        result += (i!==separators.length) ? separators[i] : ""})
+    columns.forEach((col, i) => {
+        if(i!==0) {
+            result += row[col.title]; 
+            result += (i-1!==separators.length) ? separators[i-1] : ""
+        }
+    })
     return result
 }
 
