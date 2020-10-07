@@ -1,5 +1,9 @@
+//Класс для открытия GET доступа к файлам 
 const path = require("path")
 
+
+//Ключ - физическое расположение
+//Значение - сетевое расположение
 const DEFAULT_PATH = [
 {"../pages/index.html":"/"},
 {"../pages/js/auth-logic.js":"/js/auth-logic.js"},

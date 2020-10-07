@@ -1,3 +1,4 @@
+//По умолчанию первый столбец всегда id, а последний Message, для них прописана отдельная логика
 const columns = [ 
     {title:"id", field:"id", editor:"input"},
     {title:"Timestamp", field:"Timestamp", editor:"input"},
@@ -38,20 +39,6 @@ function separate(str, template) {
     }
     return defaultSeparate(str, template)
 }
-
-//Old version
-// function defaultSeparate(str, template) {
-//     const row = {}
-//     template.forEach((element, i) => {
-//         j = str.indexOf(element)
-//         row[columns[i].title] = str.substring(0, j).trim()
-//         str = str.substring(j+element.length).trim()
-//         if(i===(template.length-1)) {
-//             row[columns[i+1].title] = str
-//         }
-//     });
-//     return row
-// }
 
 
 function defaultSeparate(str, template) {
