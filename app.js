@@ -16,7 +16,7 @@ const app = express()
 const pather = new Pather(app)
 myModel.initLogModel()
 pather.setDefaultAccess()
-
+app.set("view engine", "hbs");
 
 mongoose.connect(config.get("mongoURL"), { useNewUrlParser: true, useUnifiedTopology: true  })
 const db = mongoose.connection;
