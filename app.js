@@ -17,13 +17,10 @@ const app = express()
 //Создаем класс Pather которые откроет нам get доступ к стандартным путям см. класс Pather.js
 const pather = new Pather(app)
 pather.setDefaultAccess()
-<<<<<<< HEAD
 app.set("view engine", "hbs");
-=======
 //Из модуля моделей инициализируем Log модель необходимую для mongoDB
 myModel.initLogModel()
 
->>>>>>> master
 
 
 //Пытаемся подключится к mongodb используя стандартные параметры
