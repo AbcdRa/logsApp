@@ -6,7 +6,8 @@ const txt2log = require("../util/txt2log")
 const Log = require("../util/logSchema").getLogModel()
 
 const upload = multer({
-    dest: "files"
+    dest: "files",
+    limits: { fieldSize: 100 * 1024 * 1024 }
 })
 
 router.get("/",(req, res) => {
