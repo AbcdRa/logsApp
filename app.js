@@ -4,10 +4,11 @@ const config = require("config")
 const mongoose = require("mongoose")
 const myModel = require('./util/logSchema')
 const Pather= require("./util/Pather")
+const Handlebars = require("handlebars");
 //Подключаем необходимые библиотеки
 
 
-//
+//Берем порт из объекта process если он существует
 const PORT = process.env.PORT || 80
 
 
