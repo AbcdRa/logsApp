@@ -1,0 +1,35 @@
+<div class="table-controls mt-2 ml-3 invisible" style="font-size: 14px;" id="div-table-control">
+    <span>
+        <label>Поле: </label>
+        <select id="filter-field">
+          <option value="Timestamp">Timestamp</option>
+          <option value="Message Type">Message Type</option>
+          <option value="Source of messager">Source of message</option>
+          <option value="Message">Message</option>
+        </select>
+    </span>
+  
+    <span>
+        <label>Операция: </label>
+        <select id="filter-type">
+          <option value="like">Поиск</option>
+          <option value="=">=</option>
+          <option value="<">&lt;</option>
+          <option value="<=">&lt;=</option>
+          <option value=">">&gt;</option>
+          <option value=">=">&gt;=</option>
+          <option value="!=">!=</option>
+        </select>
+    </span>
+  
+    <span>
+        <label>Значение: </label> <input id="filter-value" type="text" placeholder="value to filter">
+    </span>
+
+    <button id="filter-clear">Убрать фильтр</button>
+    <button id="delete-form" onclick="deleteSelectedRows()">Удалить строки</button>
+    <button id="save-form" onclick="saveTable()">Загрузить таблицу</button>
+    {{#if isUpdateble}}
+    <button id="update-form" onclick="updateTable()">Обновить таблицу</button>
+    {{/if}}
+ </div>

@@ -1,0 +1,13 @@
+{{> header title="Гостевая"}}
+<body>
+    <form class="m-3">
+        <h1>Загрузить лог</h1>
+        <input type="file" id="file" onchange="showFile(this)">
+    </form>
+    {{> tableControls}}
+    <div id="example-table" style="font-size: 12px;"></div>
+    <script src="/js/txt2log.js"></script>
+    <script src="/js/table-logic.js"></script>
+    <script src="/js/log-logic.js"></script>
+</body>
+</html>

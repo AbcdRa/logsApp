@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
         }
         const logName = req.session.logName
         logTable = await Log.find({name:logName}).exec()
-        return res.sendFile(path.join(__dirname, "../pages/view.html"))
+        return res.render("view.hbs")
     }
     return res.redirect("/")
 })
