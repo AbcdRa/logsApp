@@ -2,9 +2,10 @@ const express = require("express")
 const session = require("express-session")
 const config = require("config")
 const mongoose = require("mongoose")
+const hbs = require("hbs")
 const myModel = require("./util/logSchema")
 const Pather= require("./util/Pather")
-const Handlebars = require("handlebars");
+
 //Подключаем необходимые библиотеки
 
 
@@ -17,7 +18,8 @@ const app = express()
 //Создаем класс Pather которые откроет нам get доступ к стандартным путям см. класс Pather.js
 const pather = new Pather(app)
 pather.setDefaultAccess()
-app.set("view engine", "hbs");
+app.set("view engine", "hbs")
+hbs.registerPartials(__dirname + '/views/partials')
 //Из модуля моделей инициализируем Log модель необходимую для mongoDB
 myModel.initLogModel()
 
@@ -47,6 +49,9 @@ app.use(session({
 //Подключаем роуты, в этих файлах get запросы обрабатываются по особому
 app.use("/auth", require("./routes/auth"))
 app.use("/logs", require("./routes/logs"))
+//А это простой рендер 
+app.get("/", (req,res) => res.render("index.hbs"))
+app.get("/guest", (req,res) => res.render("guest.hbs"))
 
 
 //Запускаем приложение и пишем в консоль 
