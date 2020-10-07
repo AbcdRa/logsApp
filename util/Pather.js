@@ -24,12 +24,13 @@ class Pather {
     }
 
 
-
     openAccess(filename, netpath) {
         this.app.get(netpath, (req, res) => {
             res.sendFile(path.join(__dirname, filename))
         })
     }
+
+    
     setDefaultAccess() {
         //Получаем первый ключ объекта массива и от этого ключа получаем значение
         DEFAULT_PATH.forEach((obj) => this.openAccess(Object.keys(obj)[0], obj[Object.keys(obj)[0]]))
