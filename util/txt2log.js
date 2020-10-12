@@ -7,20 +7,21 @@ const columns = [
     {title:"Message", field:"Message", editor:"input"},
 ]
 const separators = [", ",  "     ", "  "]
-const template = [[0, 19], [21, 43], [43, 50]]
+//const template = [[0, 19], [21, 43], [43, 50], [50]]
 
 
 function txt2log(txt) {
     const logTable = []
     const rows = txt.split("\n")
     rows.forEach((row, i) => {
-        let sRow = separate(row, template)
+        let sRow = separate(row, separators)
         sRow.id = i
         logTable.push(sRow)
         
     })
     return logTable
 } 
+
 
 
 function separate(str, template) {
@@ -41,21 +42,38 @@ function separate(str, template) {
 }
 
 
+// function defaultSeparate(str, template) {
+//     const row = {}
+//     for(let i = 1; i < columns.length; i++) {
+//         //Если не последний элемент то режем строку по границам
+//         if(i!==columns.length-1) {
+//             row[columns[i].title] = str.substring(template[i-1][0],template[i-1][1]).trim()
+//         }
+//         //Если это последний то вырезаем строку до конца
+//         else {
+//             row[columns[i].title] = str.substring(template[i-2][1]).trim()
+//         }
+    
+//     }
+//     return row
+// }
+
+
 function defaultSeparate(str, template) {
     const row = {}
-    for(let i = 1; i < columns.length; i++) {
-        //Если не последний элемент то режем строку по границам
-        if(i!==columns.length-1) {
-            row[columns[i].title] = str.substring(template[i-1][0],template[i-1][1]).trim()
+    template.forEach((element, i) => {
+        j = str.indexOf(element)
+        row[columns[i+1].title] = str.substring(0, j).trim()
+        str = str.substring(j+element.length).trim()
+        if(i===(template.length-1)) {
+            row[columns[i+2].title] = str
         }
-        //Если это последний то вырезаем строку до конца
-        else {
-            row[columns[i].title] = str.substring(template[i-2][1]).trim()
-        }
-    
-    }
+    });
     return row
 }
+
+
+
 
 
 try {

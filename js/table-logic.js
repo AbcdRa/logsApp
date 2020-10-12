@@ -102,8 +102,7 @@ function filterEnable(table)  {
 }
 
 
-
-function saveAsTxt(tableName) {
+function getTableText(tableName) {
     let tableText = ""
     table.getData().sort( (r1, r2) => r2[columns[0].title] - (r1[columns[0].title]))
     .forEach(
@@ -111,6 +110,13 @@ function saveAsTxt(tableName) {
             tableText += row2str(row) + '\n'
         }
     )
+    return tableText.substring(0,tableText.length-1)
+}
+
+
+
+function saveAsTxt(tableName) {
+    let tableText =getTableText(tableName)
     download(tableText.substring(0,tableText.length-1), tableName, ".txt")
 }
 
@@ -125,6 +131,23 @@ function row2str(row) {
     })
     return result
 }
+
+// function row2str(row) {
+//     let result = ""
+//     columns.forEach((col, i) => {
+//         if(i!==0) {
+//             result += row[col.title]; 
+//             if(i-1!== separators.length) {
+//                 result += separators[i-1]
+//             }
+//             if(i !== template.length) {
+//                 result += " ".repeat(template[i][0]-result.length) 
+//             }
+//         }
+//     })
+//     return result
+// }
+
 
 
 function download(data, filename, type) {

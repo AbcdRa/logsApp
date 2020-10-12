@@ -1,12 +1,21 @@
 const express = require("express")
 const session = require("express-session")
 const config = require("config")
-const mongoose = require("mongoose")
 const hbs = require("hbs")
-const myModel = require("./util/logSchema")
 const Pather= require("./util/Pather")
+const multer = require("multer")
 
-//Подключаем необходимые библиотеки
+
+
+// const storageConfig = multer.diskStorage({
+//     destination: (req, file, cb) =>{
+//         cb(null, "uploads");
+//     },
+//     filename: (req, file, cb) =>{
+//         cb(null, file.originalname);
+//     }
+// });
+
 
 
 //Берем порт из объекта process если он существует
@@ -20,19 +29,8 @@ const pather = new Pather(app)
 pather.setDefaultAccess()
 app.set("view engine", "hbs")
 hbs.registerPartials(__dirname + '/views/partials')
-//Из модуля моделей инициализируем Log модель необходимую для mongoDB
-myModel.initLogModel()
 
-
-
-//Пытаемся подключится к mongodb используя стандартные параметры
-mongoose.connect(config.get("mongoURL"), { useNewUrlParser: true, useUnifiedTopology: true  })
-const db = mongoose.connection;
-// Привязать подключение к событию ошибки  (получать сообщения об ошибках подключения)
-db.on("error", console.error.bind(console, "Сonnection error:"));
-db.once("open", function() {
-    console.log("Successfully connect to DB");
-});
+// app.use(multer({storage:storageConfig}).single("filedata"));
 
 
 //Используем middleware для express которые позволяет организовывать сессии

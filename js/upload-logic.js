@@ -1,14 +1,14 @@
 function upload(form) {
     const reader = new FileReader()
-    const uploadedFile = form.files[0]
+    let uploadedFile = form.files[0]
+    console.log(uploadedFile)
     let filename = document.getElementById("logName").value
-    if(!filename) filename=uploadedFile.name
-    
+    if(!filename) filename = uploadedFile.name
+    console.log(uploadedFile.name)
     reader.readAsText(uploadedFile);
 
     reader.onload = function() {
-        const log = reader.result
-        sendFileOnServer(log, filename)
+        sendFileOnServer(uploadedFile, filename)
     };
   
     reader.onerror = function() {
@@ -24,9 +24,10 @@ function sendFileOnServer(file, name) {
     //Инициализируем контейнер для отправляемых полей
     const formData = new FormData();
     formData.append("logFile", file);
-    formData.append("logName", name);
     //Делаем пост запрос на страницу /auth
     xhr.open("POST", '/logs/upload');
+    xhr.setRequestHeader("logName", name)
+
     //Ожидаем получить респонс в виде файла json
     xhr.responseType = 'json';
 

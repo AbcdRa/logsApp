@@ -2,7 +2,7 @@ const express = require("express")
 const multer = require("multer")
 const router = express.Router()
 const upload = multer({
-    dest: "files"
+    dest: "uploads"
 })
 
 const loginedUsers = [
@@ -16,11 +16,12 @@ const loginedUsers = [
     }
 ]
 
-router.post("/", upload.none(),(req, res) => {
+router.post("/", upload.none() ,(req, res) => {
     const formData = req.body
     const login = formData['login']
     const password = formData['password']
-    
+    //DEBUGMOMENT
+    console.log(formData)
     const user = loginedUsers.find((user) => {
         return user.login === login
     })

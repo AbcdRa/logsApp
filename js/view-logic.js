@@ -3,7 +3,10 @@ let logTable
 
 
 function updateTable() {
-    postRequest("/logs/view/update",{logTable:JSON.stringify(logTable), logName:logName}, res => alert(res))
+    var file = new Blob([getTableText(logTable)]);
+    file = new File([file], logName)
+    console.log(file)
+    postRequest("/logs/view/update",{logTable:file, logName:logName}, res => alert(res))
 }
 
 

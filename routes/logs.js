@@ -3,11 +3,20 @@ const path = require("path")
 const multer = require("multer")
 const router = express.Router()
 const txt2log = require("../util/txt2log")
-const Log = require("../util/logSchema").getLogModel()
+const storage = require("../util/Storage")
 
 const upload = multer({
-    dest: "files",
-    limits: { fieldSize: 100 * 1024 * 1024 }
+    storage:require("../util/Storage"),
+    fileFilter:function(req, file, cb) {
+        const isDuplicate = storage.isDuplicate(req.get('logName'))
+        if(isDuplicate) {
+            console.log("Нашелся дублер")
+            cb(new Error("Имя лога занято"), false)
+        } else {
+            cb(null, true)
+            console.log("Лог сохранен")
+        }
+    } 
 })
 
 router.get("/",(req, res) => {
@@ -31,39 +40,29 @@ router.use("/view", require("./view"))
 
 
 //Сохранение лога
-router.post("/upload", upload.none(), async (req, res) => {
+router.post("/upload",  async (req, res) => {
     if(!req.session.checked) {    
         return res.json({"message":"Not Login"})
     }
+    let logUpload = upload.single("logFile") 
+    let message = ""
 
-    const logTable = txt2log(req.body.logFile)
-    const logName = req.body.logName
-    const newLog = new Log({table:logTable, name:logName})
-    const duplicate = await Log.exists({ name: logName });
-    if(duplicate) {
-        return res.json({message:"Имя лога занято"})
-    }
-    const saveLog = await newLog.save()
-    if(saveLog!==newLog) {
-        console.log("Невозможно сохранить")
-        console.log(saveLog)
-        return res.json({message:"Произошла ошибка(на сервере): "+saveLog})
-    }
-    console.log("Лог успешно сохранен: "+logName)
-    return res.json({message:"OK"})
+    await logUpload(req, res, function (err) {
+        if (err) {
+            message = err.message
+            return res.json({message})
+        }       
+        message = "OK"
+        return res.json({message})
+    })
     
-    
+
 })
 
 
 router.post("/db",(req,res) => {
     if(req.session.checked) {
-        Log.find(function (err, logs) {
-            if (err) return console.error(err);
-            const logList = []
-            logs.forEach(log => logList.push(log.name))
-            return res.json({"message":"OK", "logList":logList})
-        })
+        return res.json({message:"OK", logList:storage.getLogNames()})
     } else {
     //При попытке зайти неавторизованным отправляем на основную страницу авторизации
         res.redirect("/")
