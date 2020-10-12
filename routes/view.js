@@ -1,15 +1,15 @@
 const express = require("express")
 const multer = require("multer")
 const router = express.Router()
-const path = require("path")
 const Log = require("../util/Log")
 const storage = require("../util/Storage")
 const upload = multer({
-    storage:require("../util/Storage"),
+    storage:storage,
 })
 let logTable 
 
 
+// /logs/view/
 router.get("/", async (req, res) => {
     if (req.session.checked) {
         if(!req.session.logName) {
@@ -29,6 +29,15 @@ router.post("/table", upload.none(), (req, res) => {
     }
     return res.redirect("/logs")
 })
+
+
+router.post("/tableName", upload.none(), (req, res) => {
+    if (req.session.checked && req.session.logName) {
+        return res.json({message:"OK", logName:req.session.logName})
+    }
+    return res.json({message:"OK"})
+})
+
 
 
 router.post("/", upload.none(), (req, res) => {

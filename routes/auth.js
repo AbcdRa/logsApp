@@ -20,8 +20,6 @@ router.post("/", upload.none() ,(req, res) => {
     const formData = req.body
     const login = formData['login']
     const password = formData['password']
-    //DEBUGMOMENT
-    console.log(formData)
     const user = loginedUsers.find((user) => {
         return user.login === login
     })

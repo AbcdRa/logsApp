@@ -1,3 +1,9 @@
+postRequest("/logs/view/tableName",{}, (res) => {
+    if(res.logName) {
+        document.getElementById("local-view").innerHTML = res.logName
+    }
+})
+
 function upload(form) {
     const reader = new FileReader()
     let uploadedFile = form.files[0]
@@ -16,7 +22,6 @@ function upload(form) {
     };
   
 }
-
 
 function sendFileOnServer(file, name) {
     //Инициализируем реквест
@@ -50,3 +55,4 @@ function sendFileOnServer(file, name) {
     //Отправляем response
     xhr.send(formData);
 }
+

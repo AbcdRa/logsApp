@@ -15,7 +15,8 @@ const DEFAULT_PATH = [
 {"../dist/css/bootstrap/tabulator_bootstrap4.min.css.map":"/dist/css/materialize/tabulator_bootstrap4.min.css.map"},
 {"../js/db-logic.js": "/js/db-logic.js"},
 {"../js/view-logic.js": "/js/view-logic.js"},
-{"../js/table-logic.js":"/js/table-logic.js"}
+{"../js/table-logic.js":"/js/table-logic.js"},
+{"../js/post-request.js":"/js/post-request.js"}
 ]
 
 class Pather {

@@ -23,32 +23,6 @@ Tabulator.prototype.extendModule("filter", "filters", {
 });
 
 
-function postRequest(ref, json, callback) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", ref);
-    //Ожидаем получить респонс в виде файла json
-    xhr.responseType = 'json';
-    //При каждом изменения статуса получение респонса проверяем
-    //находится ли он на последней фазе 4
-    //так как файл json то берем значения поля message
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            const res = xhr.response
-            if(res["message"] === "OK") { 
-                callback(res)
-            } else {
-                alert(res["message"])
-            }
-        }
-    }
-    //Отправляем response
-    const formData = new FormData()
-    Object.keys(json).forEach(key => formData.append(key, json[key]))
-    console.log("json : ", json)
-    xhr.send(formData);
-} 
-
-
 function renderTable(logTable) {
     columns[columns.length-1].minWidth = magicNumber*getMaxLengthMessage(logTable)
     table = new Tabulator("#example-table", {
@@ -117,7 +91,7 @@ function getTableText(tableName) {
 
 function saveAsTxt(tableName) {
     let tableText =getTableText(tableName)
-    download(tableText.substring(0,tableText.length-1), tableName, ".txt")
+    download(tableText, tableName, ".txt")
 }
 
 
@@ -131,23 +105,6 @@ function row2str(row) {
     })
     return result
 }
-
-// function row2str(row) {
-//     let result = ""
-//     columns.forEach((col, i) => {
-//         if(i!==0) {
-//             result += row[col.title]; 
-//             if(i-1!== separators.length) {
-//                 result += separators[i-1]
-//             }
-//             if(i !== template.length) {
-//                 result += " ".repeat(template[i][0]-result.length) 
-//             }
-//         }
-//     })
-//     return result
-// }
-
 
 
 function download(data, filename, type) {

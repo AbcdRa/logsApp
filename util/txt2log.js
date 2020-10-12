@@ -10,22 +10,30 @@ const separators = [", ",  "     ", "  "]
 //const template = [[0, 19], [21, 43], [43, 50], [50]]
 
 
+//Преобразуем строку текста в таблицу(массив объект-строчек)
 function txt2log(txt) {
     const logTable = []
+    //разделяем все строчки в массив по \n
     const rows = txt.split("\n")
     rows.forEach((row, i) => {
+        //Каждую строчку преобразуем в объект-строку добавляем id и добавляем в таблицу
         let sRow = separate(row, separators)
         sRow.id = i
         logTable.push(sRow)
-        
     })
+    //Последняя строчка обычно пустая
+    //Но тут проверяем содержит ли оно сообщение message
+    //Если содержит то возвращяем обратно
+    let lastColumn = columns[columns.length-1].title
+    let lastRow = logTable.pop()
+    if(lastRow[lastColumn]) logTable.push(lastRow)
     return logTable
 } 
 
 
 
 function separate(str, template) {
-    
+    //Проверяем начинается ли эта строка с числа
     if(isNaN(str[0])) {
         row = {}
         for(let i = 1; i < columns.length; i++) {

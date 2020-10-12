@@ -1,45 +1,13 @@
+
 function authorization() {
-    //Инициализируем реквест
-    const xhr = new XMLHttpRequest();
-    //Инициализируем контейнер для отправляемых полей
-    const formData = new FormData();
     //Парсим и укомплектовываем в контейнер
     const login = document.forms.auth.login.value;
     const password = document.forms.auth.password.value;
-    formData.append("login", login);
-    formData.append("password", password);
-    //Делаем пост запрос на страницу /auth
-    xhr.open("POST", '/auth');
-    //Ожидаем получить респонс в виде файла json
-    xhr.responseType = 'json';
-
-    //При каждом изменения статуса получение респонса проверяем
-    //находится ли он на последней фазе 4
-    //так как файл json то берем значения поля message
-    xhr.onreadystatechange = function() {
-     if (xhr.readyState === 4) {
-        if(xhr.response["message"] !== "OK") { 
-            alert(xhr.response["message"])
-        } 
-        location.href = 'logs';
-     }
-    }
-    //Отправляем response
-    xhr.send(formData);
+    postRequest("/auth",{login, password}, (res) => location.href = 'logs')
 }
 
 function deauth() {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", '/auth/deauth');
-    //Ожидаем получить респонс в виде файла json
-    xhr.responseType = 'json';
-
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && (xhr.response["message"] === "OK")) {
-            location.href = location.origin;
-        }
-    }
-    xhr.send()
+    postRequest("/auth/deauth",{}, res => location.href = location.origin)
 }
 
 

@@ -1,4 +1,3 @@
-const logTable = []
 let nameUploadedFile
 
 

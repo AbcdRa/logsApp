@@ -6,31 +6,20 @@ const Pather= require("./util/Pather")
 const multer = require("multer")
 
 
-
-// const storageConfig = multer.diskStorage({
-//     destination: (req, file, cb) =>{
-//         cb(null, "uploads");
-//     },
-//     filename: (req, file, cb) =>{
-//         cb(null, file.originalname);
-//     }
-// });
-
-
-
 //Берем порт из объекта process если он существует
 const PORT = process.env.PORT || 80
 
 
 //Инициализируем приложение 
 const app = express()
+
 //Создаем класс Pather которые откроет нам get доступ к стандартным путям см. класс Pather.js
 const pather = new Pather(app)
 pather.setDefaultAccess()
+
+//Устанавливаем движок для рендера страниц
 app.set("view engine", "hbs")
 hbs.registerPartials(__dirname + '/views/partials')
-
-// app.use(multer({storage:storageConfig}).single("filedata"));
 
 
 //Используем middleware для express которые позволяет организовывать сессии
@@ -41,7 +30,6 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
-
 
 
 //Подключаем роуты, в этих файлах get запросы обрабатываются по особому
