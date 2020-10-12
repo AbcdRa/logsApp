@@ -98,18 +98,6 @@ function saveAsTxt(tableName) {
 }
 
 
-function row2str(row) {
-    let result = ""
-    columns.forEach((col, i) => {
-        if(i!==0) {
-            result += row[col.title]; 
-            result += (i-1!==separators.length) ? separators[i-1] : ""
-        }
-    })
-    return result
-}
-
-
 //Я не знаю как это работает своровал код с StackOverFlow
 //Не я понимаю как работает код для IE10+ 
 //Но как работает хак для старых версий не понимаю, и не тестировал не разу

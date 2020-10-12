@@ -50,23 +50,6 @@ function separate(str, template) {
 }
 
 
-// function defaultSeparate(str, template) {
-//     const row = {}
-//     for(let i = 1; i < columns.length; i++) {
-//         //Если не последний элемент то режем строку по границам
-//         if(i!==columns.length-1) {
-//             row[columns[i].title] = str.substring(template[i-1][0],template[i-1][1]).trim()
-//         }
-//         //Если это последний то вырезаем строку до конца
-//         else {
-//             row[columns[i].title] = str.substring(template[i-2][1]).trim()
-//         }
-    
-//     }
-//     return row
-// }
-
-
 function defaultSeparate(str, template) {
     const row = {}
     template.forEach((element, i) => {
@@ -81,7 +64,16 @@ function defaultSeparate(str, template) {
 }
 
 
-
+function row2str(row) {
+    let result = ""
+    columns.forEach((col, i) => {
+        if(i!==0) {
+            result += row[col.title]; 
+            result += (i-1!==separators.length) ? separators[i-1] : ""
+        }
+    })
+    return result
+}
 
 
 try {
