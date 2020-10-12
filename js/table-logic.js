@@ -1,4 +1,6 @@
 const reader = new FileReader()
+//Число для дизайна, на него надо умножить кол-во символов в строке
+//чтобы получить размер в пикселях 
 const magicNumber = 6.0344827586206895
 const clientHeight = window.innerHeight - 60
 let table
@@ -76,11 +78,12 @@ function filterEnable(table)  {
 }
 
 
-function getTableText(tableName) {
+//Возвращаяет текущую таблицу в виде текста
+function getTableText() {
     let tableText = ""
     table.getData().sort( (r1, r2) => r2[columns[0].title] - (r1[columns[0].title]))
     .forEach(
-        (row, i) => {
+        row => {
             tableText += row2str(row) + '\n'
         }
     )
@@ -90,7 +93,7 @@ function getTableText(tableName) {
 
 
 function saveAsTxt(tableName) {
-    let tableText =getTableText(tableName)
+    let tableText =getTableText()
     download(tableText, tableName, ".txt")
 }
 
@@ -107,6 +110,10 @@ function row2str(row) {
 }
 
 
+//Я не знаю как это работает своровал код с StackOverFlow
+//Не я понимаю как работает код для IE10+ 
+//Но как работает хак для старых версий не понимаю, и не тестировал не разу
+//UPD я разобрался, но вопросы ещё есть
 function download(data, filename, type) {
     var file = new Blob([data], {type: type});
     if (window.navigator.msSaveOrOpenBlob) // IE10+

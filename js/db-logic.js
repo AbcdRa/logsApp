@@ -1,4 +1,5 @@
-postRequest("/logs/db",{}, (res) => renderInfoTable(res))
+postRequest("/logs/db",{}, (res) => renderLogList(res.logList))
+//Динамически меняем имя лога
 postRequest("/logs/view/tableName",{}, (res) => {
     if(res.logName) {
         document.getElementById("local-view").innerHTML = res.logName
@@ -7,6 +8,7 @@ postRequest("/logs/view/tableName",{}, (res) => {
 
 let id = 0
 
+//Функция для генерации интерактивной кнопки Просмотреть
 function getViewButton(logName) {
     let e = document.createElement("button")
     e.className = "btn btn-outline-primary ml-2"
@@ -20,6 +22,7 @@ function getViewButton(logName) {
     return e
 }
 
+//Функция для генерации интерактивной кнопки удалить
 function getDeleteButton(logName) {
     let e = document.createElement("button")
     e.className = "btn btn-outline-danger ml-2"
@@ -32,11 +35,12 @@ function getDeleteButton(logName) {
 }
 
 
-function renderInfoTable(response) {
+//Отображаем список логов
+function renderLogList(logList) {
     const newDiv = document.createElement("div")
     newDiv.className = "m-3"
     newDiv.style = "font-size:20px;"
-    response.logList.forEach(logName => {
+    logList.forEach(logName => {
         const p = document.createElement("p")
         p.innerText = logName
         p.append(getViewButton(logName))
@@ -44,6 +48,5 @@ function renderInfoTable(response) {
         newDiv.append(p)
     });
     document.body.append(newDiv)
-    console.log(response.logList)
 }
 
