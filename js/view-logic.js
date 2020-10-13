@@ -12,9 +12,8 @@ postRequest("/logs/view/table",{},(res)=>{
 
 
 function updateTable() {
-    var file = new Blob([getTableText(logTable)]);
+    var file = new Blob([getTableText()]);
     file = new File([file], logName)
-    console.log(file)
     postRequest("/logs/view/update",{logTable:file, logName:logName}, res => alert(res))
 }
 

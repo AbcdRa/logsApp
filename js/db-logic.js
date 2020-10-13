@@ -1,4 +1,4 @@
-postRequest("/logs/db",{}, (res) => renderLogList(res.logList))
+postRequest("/logs/logList",{}, (res) => renderLogList(res.logList))
 //Динамически меняем имя лога
 postRequest("/logs/view/tableName",{}, (res) => {
     if(res.logName) {

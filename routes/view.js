@@ -23,6 +23,14 @@ router.get("/", async (req, res) => {
 })
 
 
+router.post("/", upload.none(), (req, res) => {
+    if(req.session.checked) {
+        req.session.logName = req.body.logName
+        return res.json({message:"OK"})
+    }
+})
+
+
 router.post("/table", upload.none(), (req, res) => {
     if (req.session.checked && req.session.logName) {
         return res.json({logTable:logTable, message:"OK", logName:req.session.logName})
@@ -40,19 +48,13 @@ router.post("/tableName", upload.none(), (req, res) => {
 
 
 
-router.post("/", upload.none(), (req, res) => {
-    if(req.session.checked) {
-        req.session.logName = req.body.logName
-        return res.json({message:"OK"})
-    }
-})
+
 
 
 router.post("/update", upload.single("logTable"), async(req, res) => {
     if(req.session.checked) {
         const newLogTable = req.file
         const json = {message:""}
-        console.log(newLogTable)
         if(storage.isDuplicate(req.file.originalname)) {
             json.message = "Лог успешно обновлен"
         }

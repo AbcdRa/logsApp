@@ -55,7 +55,9 @@ function defaultSeparate(str, template) {
     template.forEach((element, i) => {
         j = str.indexOf(element)
         row[columns[i+1].title] = str.substring(0, j).trim()
-        str = str.substring(j+element.length).trim()
+        if(j!==-1) {
+            str = str.substring(j+element.length).trim()
+        }
         if(i===(template.length-1)) {
             row[columns[i+2].title] = str
         }

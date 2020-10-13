@@ -3,7 +3,6 @@ const session = require("express-session")
 const config = require("config")
 const hbs = require("hbs")
 const Pather= require("./util/Pather")
-const multer = require("multer")
 
 
 //Берем порт из объекта process если он существует

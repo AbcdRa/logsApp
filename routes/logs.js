@@ -58,7 +58,7 @@ router.post("/upload",  async (req, res) => {
 })
 
 
-router.post("/db",(req,res) => {
+router.post("/logList",(req,res) => {
     if(req.session.checked) {
         return res.json({message:"OK", logList:storage.getLogNames()})
     } else {
