@@ -33,12 +33,23 @@ router.get("/upload", (req,res) => {
     res.redirect("/")
 })
 
-router.use("/delete", require("./delete"))
 router.use("/view", require("./view"))
 
 
+router.delete("/",upload.none(),async (req, res) => {
+    if(req.session.checked) {
+        const json = {message:"OK"}
+        console.log(storage.deleteFile(req.body.logName))
+        return res.json(json)
+    }
+    //При попытке зайти неавторизованным отправляем на основную страницу авторизации
+    res.redirect("/")
+})
+
+
+
 //Сохранение лога
-router.post("/upload",  async (req, res) => {
+router.put("/",  async (req, res) => {
     if(!req.session.checked) {    
         return res.json({"message":"Not Login"})
     }
@@ -58,7 +69,7 @@ router.post("/upload",  async (req, res) => {
 })
 
 
-router.post("/logList",(req,res) => {
+router.get("/logList",(req,res) => {
     if(req.session.checked) {
         return res.json({message:"OK", logList:storage.getLogNames()})
     } else {

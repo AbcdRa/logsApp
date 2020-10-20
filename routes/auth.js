@@ -3,7 +3,7 @@ const multer = require("multer")
 const router = express.Router()
 const upload = multer()
 
-const loginedUsers = [
+loginedUsers = [
     {
         login: "root",
         password: "toor"
@@ -14,8 +14,13 @@ const loginedUsers = [
     }
 ]
 
+
 router.post("/", upload.none() ,(req, res) => {
     const formData = req.body
+    if(formData["deauth"]) {
+        req.session.checked = false
+        res.status(200).json({message: "OK"})
+    }
     const login = formData['login']
     const password = formData['password']
     const user = loginedUsers.find((user) => {
@@ -33,11 +38,6 @@ router.post("/", upload.none() ,(req, res) => {
     return res.status(200).json({message: "OK"})
    
     
-})
-
-router.post("/deauth", upload.none(),(req, res) => {
-    req.session.checked = false
-    return res.status(200).json({message: "OK"})
 })
 
 module.exports = router

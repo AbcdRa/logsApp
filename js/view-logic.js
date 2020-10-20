@@ -8,7 +8,7 @@ postRequest("/logs/view/table",{},(res)=>{
     document.getElementById("local-view").innerHTML = logName
     renderTable(logTable)
     document.getElementById("div-table-control").className = "table-controls mt-2 ml-3"
-})
+}, null, "GET")
 
 
 function updateTable() {

@@ -14,14 +14,14 @@ function upload(form) {
     reader.readAsText(uploadedFile);
 
     reader.onload = function() {
-        postRequest("/logs/upload", {logFile:uploadedFile}, res => {
+        postRequest("/logs", {logFile:uploadedFile}, res => {
             alert("Лог успешно загружен: " + filename)
             document.getElementById("file").value = "" 
             document.getElementById("logName").value = ""
         },
         {
             "logName": filename
-        })
+        },"PUT")
     };
   
     reader.onerror = function() {

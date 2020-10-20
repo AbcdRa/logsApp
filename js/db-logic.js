@@ -1,10 +1,10 @@
-postRequest("/logs/logList",{}, (res) => renderLogList(res.logList))
+postRequest("/logs/logList",{}, (res) => renderLogList(res.logList),null,"GET")
 //Динамически меняем имя лога
 postRequest("/logs/view/tableName",{}, (res) => {
     if(res.logName) {
         document.getElementById("local-view").innerHTML = res.logName
     }
-})
+}, null, "GET")
 
 let id = 0
 
@@ -29,7 +29,7 @@ function getDeleteButton(logName) {
     e.innerText="Удалить"
     e.id = "delete-"+id++
     e.addEventListener("click", () => { 
-        postRequest("/logs/delete", {logName:logName}, ()=>window.location.href="\logs")
+        postRequest("/logs", {logName:logName}, ()=>window.location.href="\logs", null,"DELETE")
     })
     return e
 }

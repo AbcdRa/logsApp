@@ -31,7 +31,7 @@ router.post("/", upload.none(), (req, res) => {
 })
 
 
-router.post("/table", upload.none(), (req, res) => {
+router.get("/table", upload.none(), (req, res) => {
     if (req.session.checked && req.session.logName) {
         return res.json({logTable:logTable, message:"OK", logName:req.session.logName})
     }
@@ -39,7 +39,7 @@ router.post("/table", upload.none(), (req, res) => {
 })
 
 
-router.post("/tableName", upload.none(), (req, res) => {
+router.get("/tableName", upload.none(), (req, res) => {
     if (req.session.checked && req.session.logName) {
         return res.json({message:"OK", logName:req.session.logName})
     }

@@ -7,7 +7,7 @@ function authorization() {
 }
 
 function deauth() {
-    postRequest("/auth/deauth",{}, res => location.href = location.origin)
+    postRequest("/auth",{deauth:true}, res => location.href = location.origin)
 }
 
 

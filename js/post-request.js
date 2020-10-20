@@ -1,6 +1,6 @@
-function postRequest(ref, json, callback, requestHeader=null) {
+function postRequest(ref, json, callback, requestHeader=null, method="POST") {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", ref);
+    xhr.open(method, ref);
     if(requestHeader) {
         Object.keys(requestHeader).forEach(key => {
             xhr.setRequestHeader(key, requestHeader[key])
